@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/mattiaslundberg/short-url/issues"
   },
-  "homepage": "https://github.com/mattiaslundberg/short-url#readme"
+  "homepage": "https://github.com/mattiaslundberg/short-url#readme",
+  "devDependencies": {
+    "jest": "^26.4.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
