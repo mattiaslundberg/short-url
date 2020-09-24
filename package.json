@@ -1,0 +1,19 @@
+{
+  "name": "short-url",
+  "version": "0.0.1",
+  "description": "Url shortening api",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mattiaslundberg/short-url.git"
+  },
+  "author": "Mattias Lundberg <me@mlundberg.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattiaslundberg/short-url/issues"
+  },
+  "homepage": "https://github.com/mattiaslundberg/short-url#readme"
+}
