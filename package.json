@@ -18,13 +18,16 @@
   "homepage": "https://github.com/mattiaslundberg/short-url#readme",
   "jest": {
     "testEnvironment": "node",
-    "coveragePathIgnorePatterns": ["/node_modules/"]
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "devDependencies": {
     "jest": "^26.4.2"
   },
   "dependencies": {
     "express": "^4.17.1",
+    "redis": "^3.0.2",
     "supertest": "^4.0.2"
   }
 }

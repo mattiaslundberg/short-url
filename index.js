@@ -1,5 +1,5 @@
 const express = require("express");
-const { generateShortUrl } = require("./persistence");
+const { generateShortUrl, saveToDb } = require("./persistence");
 
 const app = express();
 
@@ -9,10 +9,12 @@ app.get("/", (_, res) => {
   res.status(200).json({});
 });
 
-app.post("/", ({ body }, res) => {
+app.post("/", async ({ body }, res) => {
+  const shortUrl = generateShortUrl();
+  await saveToDb(shortUrl, body.longUrl);
   res.status(200).json({
     longUrl: body.longUrl,
-    shortUrl: generateShortUrl(),
+    shortUrl,
   });
 });
 

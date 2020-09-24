@@ -1,4 +1,5 @@
 const request = require("supertest");
+const { getFromDb } = require("../persistence");
 
 describe("GET /", () => {
   let server;
@@ -28,6 +29,18 @@ describe("POST /", () => {
     expect(res.statusCode).toBe(200);
     expect(Object.keys(res.body)).toContain("longUrl");
     expect(Object.keys(res.body)).toContain("shortUrl");
+  });
+
+  it("persists to database", async () => {
+    const res = await request(server).post("/").send({
+      longUrl: "https://mlundberg.se/something/other/thing",
+    });
+    expect(res.statusCode).toBe(200);
+
+    const shortUrl = res.body.shortUrl;
+
+    const fromDb = await getFromDb(shortUrl);
+    expect(fromDb).toBe("https://mlundberg.se/something/other/thing");
   });
 
   beforeEach(() => {
