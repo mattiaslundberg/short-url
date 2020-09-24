@@ -1,5 +1,5 @@
 const request = require("supertest");
-const { getFromDb } = require("../persistence");
+const { getFromDb, saveToDb } = require("../persistence");
 
 describe("GET /", () => {
   let server;
@@ -41,6 +41,30 @@ describe("POST /", () => {
 
     const fromDb = await getFromDb(shortUrl);
     expect(fromDb).toBe("https://mlundberg.se/something/other/thing");
+  });
+
+  beforeEach(() => {
+    server = require("../index");
+  });
+
+  afterEach(() => {
+    server.close();
+  });
+});
+
+describe("GET /:shortUrl", () => {
+  let server;
+
+  it("redirects on found url", async () => {
+    await saveToDb("hello", "https://google.com");
+    const res = await request(server).get("/hello").send();
+
+    expect(res.statusCode).toBe(302);
+  });
+
+  it("sends error on nonexisting url", async () => {
+    const res = await request(server).get("/nonexisting").send();
+    expect(res.statusCode).toBe(404);
   });
 
   beforeEach(() => {
