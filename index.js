@@ -12,7 +12,7 @@ app.get("/", (_, res) => {
 app.post("/", ({ body }, res) => {
   res.status(200).json({
     longUrl: body.longUrl,
-    shortUrl: generateShortUrl(body.longUrl),
+    shortUrl: generateShortUrl(),
   });
 });
 
