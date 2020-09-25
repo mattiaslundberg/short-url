@@ -1,5 +1,6 @@
 const redis = require("redis");
 const { REDIS_URL } = process.env;
+console.log("REDIS URL", REDIS_URL);
 
 const generateShortUrl = () => {
   return [...Array(12)].map(() => Math.random().toString(36)[2]).join("");
