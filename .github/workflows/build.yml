@@ -73,4 +73,4 @@ jobs:
 
       - name: Deploy lambda
         if: steps.claudia-cache.outputs.cache-hit == 'true'
-        run: npx claudia --update --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }}
+        run: npx claudia update --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }}
