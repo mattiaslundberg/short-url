@@ -37,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - uses: actions/cache@v2
         id: claudia-cache
         with:
