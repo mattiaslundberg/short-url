@@ -65,7 +65,7 @@ jobs:
 
       - name: Get redis endpoint
         id: redis
-        run: echo "::set-output name=redis-url::$(aws elasticache describe-cache-clusters --profile codelabs --region eu-north-1 --cache-cluster-id shorturl --show-cache-node-info | jq '.CacheClusters[].CacheNodes[].Endpoint.Address')"
+        run: echo "::set-output name=redis-url::$(aws elasticache describe-cache-clusters --region eu-north-1 --cache-cluster-id shorturl --show-cache-node-info | jq '.CacheClusters[].CacheNodes[].Endpoint.Address')"
 
       - name: Setup new lambda handler
         if: steps.claudia-cache.outputs.cache-hit != 'true'
