@@ -65,7 +65,7 @@ jobs:
 
       - name: Setup new lambda handler
         if: steps.claudia-cache.outputs.cache-hit != 'true'
-        run: npx claudia --handler lambda.handler --deploy-proxy-api --region eu-north-1
+        run: npx claudia create --handler lambda.handler --deploy-proxy-api --region eu-north-1
 
       - name: Deploy lambda
         if: steps.claudia-cache.outputs.cache-hit == 'true'
