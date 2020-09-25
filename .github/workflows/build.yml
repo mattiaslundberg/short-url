@@ -54,7 +54,7 @@ jobs:
 
       - name: Setup redis instance
         if: steps.claudia-cache.outputs.cache-hit != 'true'
-        run: aws elasticache create-cache-cluster --cache-cluster-id shorturl --engine redis
+        run: aws elasticache create-cache-cluster --cache-cluster-id shorturl --engine redis --region eu-north-1
 
       - name: Setup new lambda handler
         if: steps.claudia-cache.outputs.cache-hit != 'true'
