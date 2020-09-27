@@ -1,12 +1,14 @@
+const path = require("path");
 const express = require("express");
 const { generateShortUrl, saveToDb, getFromDb } = require("./persistence");
 
 const app = express();
 
 app.use(express.json());
+app.use(express.static("public"));
 
 app.get("/", (_, res) => {
-  res.status(200).json({});
+  res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 app.param("shortUrl", (req, res, next, shortUrl) => {
