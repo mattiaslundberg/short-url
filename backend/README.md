@@ -7,3 +7,5 @@ Backend for url shortening service
 3. Start supporting services `docker-compose up -d`
 4. Start server `nodejs index.js`
 5. Run tests `npm test`
+
+Server will be running on localhost:3000 .
