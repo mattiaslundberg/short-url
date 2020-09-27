@@ -24,8 +24,8 @@ app.get("/:shortUrl", ({ longUrl }, res) => {
   res.redirect(longUrl);
 });
 
-app.post("/", async ({ body }, res) => {
-  const shortUrl = generateShortUrl();
+app.post("/", async ({ body, headers }, res) => {
+  const shortUrl = `http://${headers.host}/${generateShortUrl()}`;
   await saveToDb(shortUrl, body.longUrl);
   res.status(200).json({
     longUrl: body.longUrl,
