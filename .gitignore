@@ -121,3 +121,6 @@ dist
 
 # Terraform
 .terraform/
+
+# Ignore public symlink
+backend/public
