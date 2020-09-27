@@ -30,8 +30,8 @@ jobs:
         with:
           redis-version: 6
 
-      - run: npm ci
-      - run: npm test
+      - run: cd backend && npm ci
+      - run: cd backend && npm test
 
   deploy:
     runs-on: ubuntu-latest
@@ -43,7 +43,7 @@ jobs:
       - uses: actions/cache@v2
         id: claudia-cache
         with:
-          path: claudia.json
+          path: backend/claudia.json
           key: ${{ runner.os }}-v2
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -51,7 +51,7 @@ jobs:
         with:
           node-version: 14.x
 
-      - run: npm ci
+      - run: cd backend && npm ci
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -62,7 +62,7 @@ jobs:
 
       # - name: Destroy claudia
       #   if: steps.claudia-cache.outputs.cache-hit == 'true'
-      #   run: npx claudia destroy
+      #   run: cd backend && npx claudia destroy
 
       # - name: Destroy redis instance
       #   if: steps.claudia-cache.outputs.cache-hit == 'true'
@@ -78,8 +78,8 @@ jobs:
 
       # - name: Setup new lambda handler
       #   if: steps.claudia-cache.outputs.cache-hit != 'true'
-      #   run: npx claudia create --handler lambda.handler --deploy-proxy-api --region eu-north-1 --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }} --security-group-ids sg-079b962b5246bb104 --subnet-ids subnet-29e00840,subnet-316d587b,subnet-6b343f13
+      #   run: cd backend && npx claudia create --handler lambda.handler --deploy-proxy-api --region eu-north-1 --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }} --security-group-ids sg-079b962b5246bb104 --subnet-ids subnet-29e00840,subnet-316d587b,subnet-6b343f13
 
       # - name: Deploy lambda
       #   if: steps.claudia-cache.outputs.cache-hit != 'true'
-      #   run: npx claudia update --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }}
+      #   run: cd backend && npx claudia update --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }}
