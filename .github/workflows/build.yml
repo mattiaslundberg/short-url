@@ -51,6 +51,15 @@ jobs:
         with:
           node-version: 14.x
 
+      - name: Install frontend deps
+        run: cd frontend && npm ci
+
+      - name: Build frontend
+        run: cd frontend && npm run build
+
+      - name: Copy frontend for distribution
+        run: cp -r frontend/public backend/
+
       - run: cd backend && npm ci
 
       - name: Configure AWS credentials
