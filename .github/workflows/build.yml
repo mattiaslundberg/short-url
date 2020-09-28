@@ -69,9 +69,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
 
-      # - name: Destroy claudia
-      #   if: steps.claudia-cache.outputs.cache-hit == 'true'
-      #   run: cd backend && npx claudia destroy
+      - name: Destroy claudia
+        # if: steps.claudia-cache.outputs.cache-hit == 'true'
+        run: cd backend && npx claudia destroy
 
       # - name: Destroy redis instance
       #   if: steps.claudia-cache.outputs.cache-hit == 'true'
@@ -86,7 +86,7 @@ jobs:
         run: echo "::set-output name=redis-url::$(aws elasticache describe-cache-clusters --region eu-north-1 --cache-cluster-id shorturl --show-cache-node-info | jq '.CacheClusters[].CacheNodes[].Endpoint.Address')"
 
       - name: Setup new lambda handler
-        if: steps.claudia-cache.outputs.cache-hit != 'true'
+        # if: steps.claudia-cache.outputs.cache-hit != 'true'
         run: cd backend && npx claudia create --handler lambda.handler --deploy-proxy-api --region eu-north-1 --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }} --security-group-ids sg-079b962b5246bb104 --subnet-ids subnet-29e00840,subnet-316d587b,subnet-6b343f13 || true
 
       - name: Deploy lambda
