@@ -69,9 +69,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
 
-      - name: Destroy claudia
-        if: steps.claudia-cache.outputs.cache-hit == 'true'
-        run: cd backend && npx claudia destroy
+      # - name: Destroy claudia
+      #   if: steps.claudia-cache.outputs.cache-hit == 'true'
+      #   run: cd backend && npx claudia destroy
 
       # - name: Destroy redis instance
       #   if: steps.claudia-cache.outputs.cache-hit == 'true'
