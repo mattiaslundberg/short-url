@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.get("/", (_, res) => {
-  res.sendFile(path.join(__dirname, "public/index.html"));
+  res.sendFile(path.join(__dirname, "public/prodindex.html"));
 });
 
 app.param("shortUrl", (req, res, next, shortUrl) => {
