@@ -87,8 +87,8 @@ jobs:
 
       - name: Setup new lambda handler
         if: steps.claudia-cache.outputs.cache-hit != 'true'
-        run: cd backend && npx claudia create --handler lambda.handler --deploy-proxy-api --region eu-north-1 --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }} --security-group-ids sg-079b962b5246bb104 --subnet-ids subnet-29e00840,subnet-316d587b,subnet-6b343f13
+        run: cd backend && npx claudia create --handler lambda.handler --deploy-proxy-api --region eu-north-1 --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }} --security-group-ids sg-079b962b5246bb104 --subnet-ids subnet-29e00840,subnet-316d587b,subnet-6b343f13 || true
 
       - name: Deploy lambda
-        if: steps.claudia-cache.outputs.cache-hit != 'true'
+        if: steps.claudia-cache.outputs.cache-hit == 'true'
         run: cd backend && npx claudia update --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }}
