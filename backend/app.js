@@ -5,10 +5,21 @@ const { generateShortUrl, saveToDb, getFromDb } = require("./persistence");
 const app = express();
 
 app.use(express.json());
-app.use(express.static("public"));
 
 app.get("/", (_, res) => {
-  res.sendFile(path.join(__dirname, "public/prodindex.html"));
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
+
+app.get("/global.css", (_, res) => {
+  res.sendFile(path.join(__dirname, "public/global.css"));
+});
+
+app.get("/build/bundle.js", (_, res) => {
+  res.sendFile(path.join(__dirname, "public/build/bundle.js"));
+});
+
+app.get("/build/bundle.css", (_, res) => {
+  res.sendFile(path.join(__dirname, "public/build/bundle.css"));
 });
 
 app.param("shortUrl", (req, res, next, shortUrl) => {
