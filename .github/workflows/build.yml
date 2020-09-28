@@ -69,9 +69,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
 
-      # - name: Destroy claudia
-      #   if: steps.claudia-cache.outputs.cache-hit == 'true'
-      #   run: cd backend && npx claudia destroy
+      - name: Destroy claudia
+        if: steps.claudia-cache.outputs.cache-hit == 'true'
+        run: cd backend && npx claudia destroy
 
       # - name: Destroy redis instance
       #   if: steps.claudia-cache.outputs.cache-hit == 'true'
@@ -89,6 +89,6 @@ jobs:
         # if: steps.claudia-cache.outputs.cache-hit != 'true'
         run: cd backend && npx claudia create --handler lambda.handler --deploy-proxy-api --region eu-north-1 --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }} --security-group-ids sg-079b962b5246bb104 --subnet-ids subnet-29e00840,subnet-316d587b,subnet-6b343f13 || true
 
-      - name: Deploy lambda
-        # if: steps.claudia-cache.outputs.cache-hit == 'true'
-        run: cd backend && npx claudia update --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }}
+        # - name: Deploy lambda
+        #   if: steps.claudia-cache.outputs.cache-hit == 'true'
+        #   run: cd backend && npx claudia update --set-env REDIS_URL=${{ steps.redis.outputs.redis-url }}
