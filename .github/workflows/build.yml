@@ -44,7 +44,7 @@ jobs:
         id: claudia-cache
         with:
           path: backend/claudia.json
-          key: ${{ runner.os }}-v3
+          key: ${{ runner.os }}-v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
